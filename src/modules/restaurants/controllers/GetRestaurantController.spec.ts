@@ -3,7 +3,7 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 import MongoMock from "@shared/tests/MongoMock";
 
 import Restaurant from "../schema";
-import GetRestaurantRouter from "./GetRestaurantRouter";
+import GetRestaurantController from "./GetRestaurantController";
 
 describe("Get restaurant router", () => {
   beforeAll(async () => {
@@ -22,7 +22,9 @@ describe("Get restaurant router", () => {
     const MockGetRestauranteService = {
       execute: jest.fn().mockReturnValue({ status: "success" }),
     };
-    const getRestaurant = new GetRestaurantRouter(MockGetRestauranteService);
+    const getRestaurant = new GetRestaurantController(
+      MockGetRestauranteService
+    );
 
     const createdRestaurant = await Restaurant.create({
       name: "Suqueria",
@@ -45,7 +47,7 @@ describe("Get restaurant router", () => {
   it("should return validation error", async () => {
     const MockCreateRestauranteService = { execute: jest.fn() };
 
-    const createRestaurant = new GetRestaurantRouter(
+    const createRestaurant = new GetRestaurantController(
       MockCreateRestauranteService
     );
 
