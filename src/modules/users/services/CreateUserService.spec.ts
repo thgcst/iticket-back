@@ -41,4 +41,15 @@ describe("Create user service", () => {
 
     await expect(response()).rejects.toThrow();
   });
+
+  it("should create users with same name but different phones", async () => {
+    const createUser = new CreateUserService();
+    await createUser.execute({ name: "John Doe", phone: "21123121231" });
+
+    await createUser.execute({ name: "John Doe", phone: "21123121232" });
+
+    const users = await User.find({});
+
+    expect(users.length).toBe(2);
+  });
 });
