@@ -1,3 +1,4 @@
 {
-  "cSpell.words": ["Suqueria", "tsyringe", "upsert"]
+  "cSpell.words": ["Suqueria", "tsyringe", "upsert"],
+  "jest.jestCommandLine": "yarn test"
 }
