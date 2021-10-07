@@ -2,17 +2,17 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import CreateItemRouter from "./router/CreateItemRouter";
-import GetItemsOfRestaurantRouter from "./router/GetItemsOfRestaurantRouter";
+import CreateItemController from "./controllers/CreateItemController";
+import GetItemsOfRestaurantController from "./controllers/GetItemsOfRestaurantController";
 
 const itemRouter = express.Router();
 
 itemRouter.post("/", (req, res) =>
-  container.resolve(CreateItemRouter).execute(req, res)
+  container.resolve(CreateItemController).execute(req, res)
 );
 
 itemRouter.get("/", (req, res) =>
-  container.resolve(GetItemsOfRestaurantRouter).execute(req, res)
+  container.resolve(GetItemsOfRestaurantController).execute(req, res)
 );
 
 export default itemRouter;

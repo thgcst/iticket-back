@@ -3,7 +3,7 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 import MongoMock from "@shared/tests/MongoMock";
 
 import Restaurant from "../schema";
-import CreateItemRouter from "./CreateItemRouter";
+import CreateItemController from "./CreateItemController";
 
 describe("Create restaurant router", () => {
   beforeAll(async () => {
@@ -22,7 +22,7 @@ describe("Create restaurant router", () => {
     const createdRestaurant = await Restaurant.create({ name: "Suqueria" });
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateItemRouter(MockCreateItemService);
+    const createRestaurant = new CreateItemController(MockCreateItemService);
 
     const req = getMockReq({
       body: {
@@ -47,7 +47,7 @@ describe("Create restaurant router", () => {
   it("should return validation error", async () => {
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateItemRouter(MockCreateItemService);
+    const createRestaurant = new CreateItemController(MockCreateItemService);
 
     const req = getMockReq({
       body: { name: "Suqueria" },
@@ -60,23 +60,4 @@ describe("Create restaurant router", () => {
     expect(res.json).toBeCalled();
     expect(MockCreateItemService.execute).not.toBeCalled();
   });
-
-  // it("should return validation error", async () => {
-  //   const MockCreateRestauranteService = { execute: jest.fn() };
-
-  //   const createRestaurant = new CreateItemRouter(
-  //     MockCreateRestauranteService
-  //   );
-
-  //   const req = getMockReq({
-  //     body: { name: "Su" },
-  //   });
-  //   const { res } = getMockRes();
-
-  //   await createRestaurant.execute(req, res);
-
-  //   expect(res.status).toBeCalledWith(400);
-  //   expect(res.json).toBeCalled();
-  //   expect(MockCreateRestauranteService.execute).not.toBeCalled();
-  // });
 });
