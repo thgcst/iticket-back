@@ -2,8 +2,8 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import CreateItemController from "./controllers/CreateItemController";
-import GetItemsOfRestaurantController from "./controllers/GetItemsOfRestaurantController";
+import CreateItemController from "../controllers/CreateItemController";
+import GetItemsOfRestaurantController from "../controllers/GetItemsOfRestaurantController";
 
 const itemRouter = express.Router();
 
