@@ -2,8 +2,9 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 
 export type RestaurantAttributes = {
   name: string;
-  phone: string;
-  session: string[];
+  items: string[];
+  tables: string[];
+  managers: string[];
 };
 
 export type RestaurantDocument = Document & RestaurantAttributes;
