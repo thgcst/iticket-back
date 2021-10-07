@@ -19,12 +19,10 @@ describe("Get restaurant router", () => {
   });
 
   it("should clear body", async () => {
-    const MockGetRestauranteService = {
+    const MockGetRestaurantService = {
       execute: jest.fn().mockReturnValue({ status: "success" }),
     };
-    const getRestaurant = new GetRestaurantController(
-      MockGetRestauranteService
-    );
+    const getRestaurant = new GetRestaurantController(MockGetRestaurantService);
 
     const createdRestaurant = await Restaurant.create({
       name: "Suqueria",
@@ -39,16 +37,16 @@ describe("Get restaurant router", () => {
 
     expect(res.status).toBeCalledWith(200);
     expect(res.json).toBeCalledWith({ status: "success" });
-    expect(MockGetRestauranteService.execute).toHaveBeenCalledWith({
+    expect(MockGetRestaurantService.execute).toHaveBeenCalledWith({
       restaurantId: String(createdRestaurant._id),
     });
   });
 
   it("should return validation error", async () => {
-    const MockCreateRestauranteService = { execute: jest.fn() };
+    const MockCreateRestaurantService = { execute: jest.fn() };
 
     const createRestaurant = new GetRestaurantController(
-      MockCreateRestauranteService
+      MockCreateRestaurantService
     );
 
     const req = getMockReq({});
@@ -58,6 +56,6 @@ describe("Get restaurant router", () => {
 
     expect(res.status).toBeCalledWith(400);
     expect(res.json).toBeCalled();
-    expect(MockCreateRestauranteService.execute).not.toBeCalled();
+    expect(MockCreateRestaurantService.execute).not.toBeCalled();
   });
 });

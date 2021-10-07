@@ -2,10 +2,10 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 
 import MongoMock from "@shared/tests/MongoMock";
 
-import Restaurant from "../schema";
-import CreateRestaurantController from "./CreateRestaurantController";
+import User from "../schema";
+import CreateUserController from "./CreateUserController";
 
-describe("Create restaurant router", () => {
+describe("Create user controller", () => {
   beforeAll(async () => {
     await MongoMock.connect();
   });
@@ -15,18 +15,18 @@ describe("Create restaurant router", () => {
   });
 
   beforeEach(async () => {
-    await Restaurant.deleteMany({});
+    await User.deleteMany({});
   });
 
   it("should clear body", async () => {
     const MockCreateRestaurantService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateRestaurantController(
+    const createRestaurant = new CreateUserController(
       MockCreateRestaurantService
     );
 
     const req = getMockReq({
-      body: { name: "Suqueria", items: ["suco de laranja"] },
+      body: { name: "John Doe", phone: "(21) 12312-1234" },
     });
     const { res } = getMockRes();
 
@@ -34,19 +34,20 @@ describe("Create restaurant router", () => {
 
     expect(res.status).toBeCalledWith(200);
     expect(MockCreateRestaurantService.execute).toHaveBeenCalledWith({
-      name: "Suqueria",
+      name: "John Doe",
+      phone: "21123121234",
     });
   });
 
   it("should return validation error", async () => {
     const MockCreateRestaurantService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateRestaurantController(
+    const createRestaurant = new CreateUserController(
       MockCreateRestaurantService
     );
 
     const req = getMockReq({
-      body: { items: ["suco de laranja"] },
+      body: { name: "John Doe", phone: "12312" },
     });
     const { res } = getMockRes();
 
@@ -60,12 +61,12 @@ describe("Create restaurant router", () => {
   it("should return validation error", async () => {
     const MockCreateRestaurantService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateRestaurantController(
+    const createRestaurant = new CreateUserController(
       MockCreateRestaurantService
     );
 
     const req = getMockReq({
-      body: { name: "Su" },
+      body: { name: "", phone: "2112341234" },
     });
     const { res } = getMockRes();
 

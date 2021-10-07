@@ -3,7 +3,7 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 export type UserAttributes = {
   name: string;
   phone: string;
-  session: string[];
+  sessions?: string[];
 };
 
 export type UserDocument = Document & UserAttributes;
@@ -26,7 +26,7 @@ const UserSchema = new Schema(
       immutable: true,
       required: true,
     },
-    session: [
+    sessions: [
       {
         type: Schema.Types.ObjectId,
         ref: "Session",

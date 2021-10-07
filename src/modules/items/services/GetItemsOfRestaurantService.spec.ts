@@ -24,17 +24,22 @@ describe("Get items of restaurant service", () => {
     const item1 = await Item.create({
       name: "Coca",
       price: 6.5,
-      restaurant: restaurant._id,
+      restaurant: String(restaurant._id),
     });
 
     const item2 = await Item.create({
       name: "Guaraná",
       price: 7,
-      restaurant: restaurant._id,
+      restaurant: String(restaurant._id),
     });
 
-    restaurant.items.push(item1._id, item2._id);
-    await restaurant.save();
+    Restaurant.findByIdAndUpdate(
+      restaurant._id,
+      {
+        $addToSet: { items: [item1._id, item2._id] },
+      },
+      { upsert: true }
+    );
 
     const getItemsOfRestaurant = new GetItemsOfRestaurantService();
 
