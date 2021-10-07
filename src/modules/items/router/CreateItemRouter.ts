@@ -1,14 +1,16 @@
 import { Request, Response } from "express";
 
+import { autoInjectable } from "tsyringe";
 import * as Yup from "yup";
 
-import CreateRestaurantService from "../services/CreateItemService";
+import CreateItemService from "../services/CreateItemService";
 
+@autoInjectable()
 export default class CreateRestaurantRouter {
-  createRestaurantService: CreateRestaurantService;
+  createItemService: CreateItemService;
 
-  constructor(createRestaurantService: CreateRestaurantService) {
-    this.createRestaurantService = createRestaurantService;
+  constructor(createItemService: CreateItemService) {
+    this.createItemService = createItemService;
   }
 
   async execute(req: Request, res: Response) {
@@ -23,11 +25,11 @@ export default class CreateRestaurantRouter {
     try {
       const body = schema.validateSync(req.body, { stripUnknown: true });
 
-      const result = await this.createRestaurantService.execute(body);
+      const result = await this.createItemService.execute(body);
 
-      return res.send(200).json(result);
+      return res.status(200).json(result);
     } catch (error) {
-      return res.send(400).json({ error: error.message });
+      return res.status(400).json({ error: error.message });
     }
   }
 }

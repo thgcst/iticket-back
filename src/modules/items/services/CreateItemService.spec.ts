@@ -22,7 +22,7 @@ describe("Create Item Service", () => {
     let restaurant = await Restaurant.create({ name: "Suqueria" });
 
     const createItem = new CreateItemService();
-    const item = await createItem.execute({
+    await createItem.execute({
       name: "Coca",
       price: 123,
       restaurant: restaurant._id,

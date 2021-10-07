@@ -36,7 +36,7 @@ describe("Create restaurant router", () => {
 
     await createRestaurant.execute(req, res);
 
-    expect(res.send).toBeCalledWith(200);
+    expect(res.status).toBeCalledWith(200);
     expect(MockCreateItemService.execute).toHaveBeenCalledWith({
       name: "Suqueria",
       price: 123,
@@ -56,7 +56,7 @@ describe("Create restaurant router", () => {
 
     await createRestaurant.execute(req, res);
 
-    expect(res.send).toBeCalledWith(400);
+    expect(res.status).toBeCalledWith(400);
     expect(res.json).toBeCalled();
     expect(MockCreateItemService.execute).not.toBeCalled();
   });
@@ -75,7 +75,7 @@ describe("Create restaurant router", () => {
 
   //   await createRestaurant.execute(req, res);
 
-  //   expect(res.send).toBeCalledWith(400);
+  //   expect(res.status).toBeCalledWith(400);
   //   expect(res.json).toBeCalled();
   //   expect(MockCreateRestauranteService.execute).not.toBeCalled();
   // });
