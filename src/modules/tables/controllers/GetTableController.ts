@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import GetTableService from "../services/GetTableService";
 
 @autoInjectable()
-export default class CreateRestaurantRouter {
+export default class GetTableController {
   getTableService: GetTableService;
 
   constructor(getTableService: GetTableService) {

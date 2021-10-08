@@ -16,6 +16,7 @@ describe("Create Item Service", () => {
 
   beforeEach(async () => {
     await Item.deleteMany({});
+    await Restaurant.deleteMany({});
   });
 
   it("should be able to create an item", async () => {

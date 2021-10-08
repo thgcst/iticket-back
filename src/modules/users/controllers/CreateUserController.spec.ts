@@ -19,61 +19,55 @@ describe("Create user controller", () => {
   });
 
   it("should clear body", async () => {
-    const MockCreateRestaurantService = { execute: jest.fn() };
+    const MockCreateUserService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateUserController(
-      MockCreateRestaurantService
-    );
+    const createUser = new CreateUserController(MockCreateUserService);
 
     const req = getMockReq({
       body: { name: "John Doe", phone: "(21) 12312-1234" },
     });
     const { res } = getMockRes();
 
-    await createRestaurant.execute(req, res);
+    await createUser.execute(req, res);
 
     expect(res.status).toBeCalledWith(200);
-    expect(MockCreateRestaurantService.execute).toHaveBeenCalledWith({
+    expect(MockCreateUserService.execute).toHaveBeenCalledWith({
       name: "John Doe",
       phone: "21123121234",
     });
   });
 
   it("should return validation error", async () => {
-    const MockCreateRestaurantService = { execute: jest.fn() };
+    const MockCreateUserService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateUserController(
-      MockCreateRestaurantService
-    );
+    const createUser = new CreateUserController(MockCreateUserService);
 
     const req = getMockReq({
       body: { name: "John Doe", phone: "12312" },
     });
     const { res } = getMockRes();
 
-    await createRestaurant.execute(req, res);
+    await createUser.execute(req, res);
 
     expect(res.status).toBeCalledWith(400);
     expect(res.json).toBeCalled();
-    expect(MockCreateRestaurantService.execute).not.toBeCalled();
+    expect(MockCreateUserService.execute).not.toBeCalled();
   });
 
   it("should return validation error", async () => {
-    const MockCreateRestaurantService = { execute: jest.fn() };
+    const MockCreateUserService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateUserController(
-      MockCreateRestaurantService
-    );
+    const createUser = new CreateUserController(MockCreateUserService);
 
     const req = getMockReq({
       body: { name: "", phone: "2112341234" },
     });
     const { res } = getMockRes();
 
-    await createRestaurant.execute(req, res);
+    await createUser.execute(req, res);
 
     expect(res.status).toBeCalledWith(400);
     expect(res.json).toBeCalled();
-    expect(MockCreateRestaurantService.execute).not.toBeCalled();
+    expect(MockCreateUserService.execute).not.toBeCalled();
   });
 });

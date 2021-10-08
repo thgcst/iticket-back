@@ -6,7 +6,7 @@ interface Request {
 
 type Response = RestaurantDocument;
 
-export default class CreateRestaurantService {
+export default class GetRestaurantService {
   async execute({ restaurantId }: Request): Promise<Response> {
     const restaurant = await Restaurant.findById(restaurantId).populate(
       "items"

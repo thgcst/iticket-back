@@ -1,4 +1,4 @@
-import Table, { TableDocument } from "@modules/table/schema";
+import Table, { TableDocument } from "@modules/tables/schema";
 
 interface Request {
   tableId: string;
@@ -6,10 +6,12 @@ interface Request {
 
 type Response = TableDocument;
 
-export default class CreateTableService {
+export default class GetTableService {
   async execute({ tableId }: Request): Promise<Response> {
     const table = await Table.findById(tableId);
-
+    if (!table) {
+      throw new Error("Table not found.");
+    }
     return table;
   }
 }

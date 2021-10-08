@@ -1,5 +1,5 @@
 import Restaurant from "@modules/restaurants/schema";
-import Table, { TableDocument } from "@modules/table/schema";
+import Table, { TableDocument } from "@modules/tables/schema";
 
 interface Request {
   number: number;

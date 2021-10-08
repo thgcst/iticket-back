@@ -16,6 +16,7 @@ describe("Create table service", () => {
 
   beforeEach(async () => {
     await Table.deleteMany({});
+    await Restaurant.deleteMany({});
   });
 
   it("should be able to create a table", async () => {

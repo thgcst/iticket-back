@@ -3,7 +3,7 @@ import Restaurant from "@modules/restaurants/schema";
 import MongoMock from "@shared/tests/MongoMock";
 
 import Table from "../schema";
-import GetTableFromPhoneService from "./GetTableService";
+import GetTableService from "./GetTableService";
 
 describe("Get table service", () => {
   beforeAll(async () => {
@@ -16,6 +16,7 @@ describe("Get table service", () => {
 
   beforeEach(async () => {
     await Table.deleteMany({});
+    await Restaurant.deleteMany({});
   });
 
   it("should get a table from it's id", async () => {
@@ -25,12 +26,22 @@ describe("Get table service", () => {
       restaurant: restaurant._id,
     });
 
-    const getTableFromPhone = new GetTableFromPhoneService();
-    const user = await getTableFromPhone.execute({ tableId: createdTable._id });
+    const getTable = new GetTableService();
+    const table = await getTable.execute({ tableId: createdTable._id });
 
-    expect(user).toMatchObject({
+    expect(table).toMatchObject({
       number: 1,
       restaurant: restaurant._id,
     });
+  });
+
+  it("should return error if table doesn't exist", async () => {
+    const getTable = new GetTableService();
+    const response = async () =>
+      getTable.execute({
+        tableId: "615f3c597a05198a375a8e32",
+      });
+
+    await expect(response()).rejects.toThrow();
   });
 });

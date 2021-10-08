@@ -6,7 +6,7 @@ interface Request {
 
 type Response = UserDocument;
 
-export default class CreateUserService {
+export default class GetUserFromPhoneService {
   async execute(data: Request): Promise<Response> {
     const user = await User.findOne(data);
 

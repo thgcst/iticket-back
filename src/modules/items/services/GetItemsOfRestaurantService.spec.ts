@@ -16,6 +16,7 @@ describe("Get items of restaurant service", () => {
 
   beforeEach(async () => {
     await Item.deleteMany({});
+    await Restaurant.deleteMany({});
   });
 
   it("should be able to get all items of a restaurant", async () => {
