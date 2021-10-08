@@ -79,7 +79,7 @@ export default class CreateSessionService {
 
     return {
       session,
-      token: jwt.sign({ session: session._id }, authConfig.user.secret, {
+      token: jwt.sign({ sessionId: session._id }, authConfig.user.secret, {
         expiresIn: authConfig.user.expiresIn,
       }),
     };

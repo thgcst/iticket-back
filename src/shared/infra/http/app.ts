@@ -5,7 +5,7 @@ import express from "express";
 
 import cors from "cors";
 
-import TokenExpiredError from "@shared/errors/TokenExpiredError";
+import TokenError from "@shared/errors/TokenError";
 
 import routes from "./api/v1";
 // import "express-async-errors";
@@ -35,9 +35,9 @@ app.use(
       console.log(err.stack);
     }
 
-    if (err instanceof TokenExpiredError) {
+    if (err instanceof TokenError) {
       return res.status(401).json({
-        code: "token.expired",
+        code: "token.error",
         message: err.message,
       });
     }

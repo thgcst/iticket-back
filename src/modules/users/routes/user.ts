@@ -7,12 +7,12 @@ import GetUserFromPhoneController from "../controllers/GetUserFromPhoneControlle
 
 const userRouter = express.Router();
 
-userRouter.post("/", (req, res) =>
-  container.resolve(CreateUserController).execute(req, res)
-);
-
 userRouter.get("/", (req, res) =>
   container.resolve(GetUserFromPhoneController).execute(req, res)
+);
+
+userRouter.post("/", (req, res) =>
+  container.resolve(CreateUserController).execute(req, res)
 );
 
 export default userRouter;
