@@ -3,7 +3,7 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 export type UserAttributes = {
   name: string;
   phone: string;
-  sessions?: string[];
+  sessions: string[];
 };
 
 export type UserDocument = Document & UserAttributes;
