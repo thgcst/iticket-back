@@ -7,7 +7,7 @@ import authConfig from "@config/auth";
 import TokenError from "@shared/errors/TokenError";
 
 export default function userAuthentication(
-  req: Request,
+  req: UserRequest,
   res: Response,
   next: NextFunction
 ): void | Error {
@@ -24,10 +24,9 @@ export default function userAuthentication(
   }
 
   try {
-    const decoded: { sessionId: string } = jwt.verify(
-      token,
-      authConfig.user.secret
-    );
+    const decoded = jwt.verify(token, authConfig.user.secret) as {
+      sessionId: string;
+    };
 
     req.sessionId = decoded.sessionId;
 
@@ -36,3 +35,7 @@ export default function userAuthentication(
     throw new TokenError("Invalid JWT token");
   }
 }
+
+export type UserRequest = {
+  sessionId: string;
+} & Request;
