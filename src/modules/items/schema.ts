@@ -32,7 +32,11 @@ const ItemSchema = new Schema(
     image: {
       type: String,
     },
-    restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant" },
+    restaurant: {
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant",
+      required: true,
+    },
   },
   {
     timestamps: true,

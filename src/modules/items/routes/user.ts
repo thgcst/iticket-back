@@ -2,16 +2,20 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import userAuthentication from "@shared/infra/http/middlewares/userAuthentication";
+import UserAuthentication, {
+  UserRequest,
+} from "@shared/infra/http/middlewares/UserAuthentication";
 
 import GetItemsOfRestaurantController from "../controllers/GetItemsOfRestaurantController";
 
-const itemRouter = express.Router();
+const userRouter = express.Router();
 
-itemRouter.use(userAuthentication);
+userRouter.use((req: UserRequest, res, next) =>
+  container.resolve(UserAuthentication).execute(req, res, next)
+);
 
-itemRouter.get("/", (req, res) =>
+userRouter.get("/", (req, res) =>
   container.resolve(GetItemsOfRestaurantController).execute(req, res)
 );
 
-export default itemRouter;
+export default userRouter;

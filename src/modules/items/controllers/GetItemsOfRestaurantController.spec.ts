@@ -2,10 +2,10 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 
 import MongoMock from "@shared/tests/MongoMock";
 
-import Restaurant from "../schema";
+import Item from "../schema";
 import GetItemsOfRestaurantController from "./GetItemsOfRestaurantController";
 
-describe("Create restaurant router", () => {
+describe("Get items of restaurant controller", () => {
   beforeAll(async () => {
     await MongoMock.connect();
   });
@@ -15,12 +15,10 @@ describe("Create restaurant router", () => {
   });
 
   beforeEach(async () => {
-    await Restaurant.deleteMany({});
+    await Item.deleteMany({});
   });
 
   it("should clear query", async () => {
-    const createdRestaurant = await Restaurant.create({ name: "Suqueria" });
-
     const MockGetItemsOfRestaurantService = { execute: jest.fn() };
     const getItemsOfRestaurant = new GetItemsOfRestaurantController(
       MockGetItemsOfRestaurantService
@@ -28,7 +26,7 @@ describe("Create restaurant router", () => {
 
     const req = getMockReq({
       query: {
-        restaurantId: createdRestaurant._id,
+        restaurantId: "615f20456c426960831eea7b",
       },
     });
     const { res } = getMockRes();
@@ -37,7 +35,7 @@ describe("Create restaurant router", () => {
 
     expect(res.status).toBeCalledWith(200);
     expect(MockGetItemsOfRestaurantService.execute).toHaveBeenCalledWith({
-      restaurantId: String(createdRestaurant._id),
+      restaurantId: "615f20456c426960831eea7b",
     });
   });
 

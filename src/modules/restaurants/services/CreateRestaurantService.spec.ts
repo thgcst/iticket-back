@@ -3,7 +3,7 @@ import MongoMock from "@shared/tests/MongoMock";
 import Restaurant from "../schema";
 import CreateRestaurantService from "./CreateRestaurantService";
 
-describe("Create Restaurant Service", () => {
+describe("Create restaurant service", () => {
   beforeAll(async () => {
     await MongoMock.connect();
   });

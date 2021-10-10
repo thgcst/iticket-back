@@ -3,14 +3,14 @@ import { Request, Response } from "express";
 import { autoInjectable } from "tsyringe";
 import * as Yup from "yup";
 
-import GetItemsOfRestaurant from "../services/GetItemsOfRestaurantService";
+import GetItemsOfRestaurantService from "../services/GetItemsOfRestaurantService";
 
 @autoInjectable()
-export default class CreateRestaurantRouter {
-  getItemsOfRestaurant: GetItemsOfRestaurant;
+export default class GetItemsOfRestaurantController {
+  getItemsOfRestaurantService: GetItemsOfRestaurantService;
 
-  constructor(getItemsOfRestaurant: GetItemsOfRestaurant) {
-    this.getItemsOfRestaurant = getItemsOfRestaurant;
+  constructor(getItemsOfRestaurantService: GetItemsOfRestaurantService) {
+    this.getItemsOfRestaurantService = getItemsOfRestaurantService;
   }
 
   async execute(req: Request, res: Response) {
@@ -21,7 +21,7 @@ export default class CreateRestaurantRouter {
     try {
       const query = schema.validateSync(req.query, { stripUnknown: true });
 
-      const result = await this.getItemsOfRestaurant.execute(query);
+      const result = await this.getItemsOfRestaurantService.execute(query);
 
       return res.status(200).json(result);
     } catch (error) {

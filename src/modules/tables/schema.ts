@@ -16,7 +16,11 @@ const TableSchema = new Schema(
       type: Number,
       required: true,
     },
-    restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant" },
+    restaurant: {
+      type: Schema.Types.ObjectId,
+      ref: "Restaurant",
+      required: true,
+    },
     sessions: [{ type: Schema.Types.ObjectId, ref: "Session" }],
   },
   {

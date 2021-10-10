@@ -6,7 +6,7 @@ import User from "../schema";
 import CreateSessionService from "../services/CreateSessionService";
 import CreateSessionController from "./CreateSessionController";
 
-describe("Create user controller", () => {
+describe("Create session controller", () => {
   let createSessionController: CreateSessionController;
   let mockCreateSessionService: CreateSessionService;
 

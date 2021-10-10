@@ -2,15 +2,17 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import userAuthentication, {
+import UserAuthentication, {
   UserRequest,
-} from "@shared/infra/http/middlewares/userAuthentication";
+} from "@shared/infra/http/middlewares/UserAuthentication";
 
 import CreateOrderController from "../controllers/CreateOrderController";
 
 const userRouter = express.Router();
 
-userRouter.use(userAuthentication);
+userRouter.use((req: UserRequest, res, next) =>
+  container.resolve(UserAuthentication).execute(req, res, next)
+);
 
 userRouter.post("/", (req: UserRequest, res) =>
   container.resolve(CreateOrderController).execute(req, res)

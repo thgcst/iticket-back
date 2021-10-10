@@ -3,7 +3,7 @@ import { Response } from "express";
 import { autoInjectable } from "tsyringe";
 import * as Yup from "yup";
 
-import { UserRequest } from "@shared/infra/http/middlewares/userAuthentication";
+import { UserRequest } from "@shared/infra/http/middlewares/UserAuthentication";
 
 import CreateOrderService from "../services/CreateOrderService";
 
