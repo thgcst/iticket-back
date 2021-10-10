@@ -2,8 +2,8 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 
 import MongoMock from "@shared/tests/MongoMock";
 
-import User from "../schema";
-import GetUserFromPhoneController from "./SignInAdmController";
+import Adm from "../schema";
+import SignInAdmController from "./SignInAdmController";
 
 describe("Sign adm in controller", () => {
   beforeAll(async () => {
@@ -15,23 +15,23 @@ describe("Sign adm in controller", () => {
   });
 
   beforeEach(async () => {
-    await User.deleteMany({});
+    await Adm.deleteMany({});
   });
 
   it("should clear body", async () => {
-    const MockCreateUserService = { execute: jest.fn() };
+    const MockCreateAdmService = { execute: jest.fn() };
 
-    const createUser = new GetUserFromPhoneController(MockCreateUserService);
+    const createAdm = new SignInAdmController(MockCreateAdmService);
 
     const req = getMockReq({
       body: { email: "adm@adm.com", password: "123456" },
     });
     const { res } = getMockRes();
 
-    await createUser.execute(req, res);
+    await createAdm.execute(req, res);
 
     expect(res.status).toBeCalledWith(200);
-    expect(MockCreateUserService.execute).toHaveBeenCalledWith({
+    expect(MockCreateAdmService.execute).toHaveBeenCalledWith({
       email: "adm@adm.com",
       password: "123456",
     });

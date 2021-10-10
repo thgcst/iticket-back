@@ -2,15 +2,19 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import managerAuthentication from "@shared/infra/http/middlewares/managerAuthentication";
+import ManagerAuthentication, {
+  ManagerRequest,
+} from "@shared/infra/http/middlewares/ManagerAuthentication";
 
 import CreateItemController from "../controllers/CreateItemController";
 
 const managerRouter = express.Router();
 
-managerRouter.use(managerAuthentication);
+managerRouter.use((req: ManagerRequest, res, next) =>
+  container.resolve(ManagerAuthentication).execute(req, res, next)
+);
 
-managerRouter.post("/", (req, res) =>
+managerRouter.post("/", (req: ManagerRequest, res) =>
   container.resolve(CreateItemController).execute(req, res)
 );
 

@@ -2,7 +2,7 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 
 import MongoMock from "@shared/tests/MongoMock";
 
-import Restaurant from "../schema";
+import Item from "../schema";
 import CreateItemController from "./CreateItemController";
 
 describe("Create item router", () => {
@@ -15,46 +15,45 @@ describe("Create item router", () => {
   });
 
   beforeEach(async () => {
-    await Restaurant.deleteMany({});
+    await Item.deleteMany({});
   });
 
   it("should clear body", async () => {
-    const createdRestaurant = await Restaurant.create({ name: "Suqueria" });
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateItemController(MockCreateItemService);
+    const createItem = new CreateItemController(MockCreateItemService);
 
     const req = getMockReq({
       body: {
         name: "Suqueria",
         price: 123,
-        restaurant: createdRestaurant._id,
         unusedProp: "asd",
       },
+      restaurantId: "615f20456c426960831eea7b",
     });
     const { res } = getMockRes();
 
-    await createRestaurant.execute(req, res);
+    await createItem.execute(req, res);
 
     expect(res.status).toBeCalledWith(200);
     expect(MockCreateItemService.execute).toHaveBeenCalledWith({
       name: "Suqueria",
       price: 123,
-      restaurant: String(createdRestaurant._id),
+      restaurant: "615f20456c426960831eea7b",
     });
   });
 
   it("should return validation error", async () => {
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createRestaurant = new CreateItemController(MockCreateItemService);
+    const createItem = new CreateItemController(MockCreateItemService);
 
     const req = getMockReq({
       body: { name: "Suqueria" },
     });
     const { res } = getMockRes();
 
-    await createRestaurant.execute(req, res);
+    await createItem.execute(req, res);
 
     expect(res.status).toBeCalledWith(400);
     expect(res.json).toBeCalled();

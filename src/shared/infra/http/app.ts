@@ -8,7 +8,7 @@ import cors from "cors";
 import TokenError from "@shared/errors/TokenError";
 
 import routes from "./api/v1";
-// import "express-async-errors";
+import "express-async-errors";
 
 if (process.env.NODE_ENV !== "test") {
   import("@shared/infra/mongoose/connection");

@@ -31,7 +31,7 @@ export default class SignInAdmService {
 
     delete adm.password;
 
-    const token = jwt.sign({ admId: adm.id }, authConfig.adm.secret, {
+    const token = jwt.sign({ admId: adm._id }, authConfig.adm.secret, {
       expiresIn: authConfig.adm.expiresIn,
     });
 
