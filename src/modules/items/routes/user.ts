@@ -6,12 +6,12 @@ import userAuthentication from "@shared/infra/http/middlewares/userAuthenticatio
 
 import GetItemsOfRestaurantController from "../controllers/GetItemsOfRestaurantController";
 
-const itemRouter = express.Router();
+const userRouter = express.Router();
 
-itemRouter.use(userAuthentication);
+userRouter.use(userAuthentication);
 
-itemRouter.get("/", (req, res) =>
+userRouter.get("/", (req, res) =>
   container.resolve(GetItemsOfRestaurantController).execute(req, res)
 );
 
-export default itemRouter;
+export default userRouter;

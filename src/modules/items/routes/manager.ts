@@ -6,12 +6,12 @@ import managerAuthentication from "@shared/infra/http/middlewares/managerAuthent
 
 import CreateItemController from "../controllers/CreateItemController";
 
-const itemRouter = express.Router();
+const managerRouter = express.Router();
 
-itemRouter.use(managerAuthentication);
+managerRouter.use(managerAuthentication);
 
-itemRouter.post("/", (req, res) =>
+managerRouter.post("/", (req, res) =>
   container.resolve(CreateItemController).execute(req, res)
 );
 
-export default itemRouter;
+export default managerRouter;

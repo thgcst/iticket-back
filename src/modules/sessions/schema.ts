@@ -21,6 +21,7 @@ const SessionSchema = new Schema(
     table: {
       type: Schema.Types.ObjectId,
       ref: "Table",
+      required: true,
     },
     orders: [
       {
