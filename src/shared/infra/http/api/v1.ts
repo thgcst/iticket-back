@@ -1,5 +1,6 @@
 import { Router } from "express";
 
+import admsRouter from "@modules/adms/router";
 import itemsRouter from "@modules/items/router";
 import restaurantsRouter from "@modules/restaurants/router";
 import sessionsRouter from "@modules/sessions/router";
@@ -8,6 +9,7 @@ import usersRouter from "@modules/users/router";
 
 const v1Router = Router();
 
+v1Router.use("/v1", admsRouter);
 v1Router.use("/v1", itemsRouter);
 v1Router.use("/v1", restaurantsRouter);
 v1Router.use("/v1", sessionsRouter);
