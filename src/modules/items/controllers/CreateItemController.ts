@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import CreateItemService from "../services/CreateItemService";
 
 @autoInjectable()
-export default class CreateRestaurantRouter {
+export default class CreateItemController {
   createItemService: CreateItemService;
 
   constructor(createItemService: CreateItemService) {
