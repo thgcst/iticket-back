@@ -1,8 +1,8 @@
-import Session, { SessionDocument } from "@modules/sessions/schema";
 import Item, { ItemDocument } from "@modules/items/schema";
-import User from "@modules/users/schema";
-import Table from "@modules/tables/schema";
 import Restaurant from "@modules/restaurants/schema";
+import Session, { SessionDocument } from "@modules/sessions/schema";
+import Table from "@modules/tables/schema";
+import User from "@modules/users/schema";
 
 import MongoMock from "@shared/tests/MongoMock";
 
@@ -10,6 +10,9 @@ import Order from "../schema";
 import CreateOrderService from "./CreateOrderService";
 
 describe("Create Item Service", () => {
+  let session: SessionDocument;
+  let item: ItemDocument;
+
   beforeAll(async () => {
     await MongoMock.connect();
   });
@@ -18,12 +21,14 @@ describe("Create Item Service", () => {
     await MongoMock.disconnect();
   });
 
-  let session: SessionDocument;
-  let item: ItemDocument;
-
   beforeEach(async () => {
     await Order.deleteMany({});
     await Session.deleteMany({});
+    await User.deleteMany({});
+    await Restaurant.deleteMany({});
+    await Table.deleteMany({});
+    await Item.deleteMany({});
+
     const { id: user } = await User.create({
       name: "John",
       phone: "21999999999",
@@ -44,11 +49,11 @@ describe("Create Item Service", () => {
     await createOrder.execute({
       items: [
         {
-          item: item.id,
+          item: item._id,
           quantity: 2,
         },
       ],
-      session: session.id,
+      session: session._id,
     });
 
     const get = await Order.find({});
@@ -56,30 +61,30 @@ describe("Create Item Service", () => {
     expect(get).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          items: [
-            {
-              item: item.id,
+          items: expect.arrayContaining([
+            expect.objectContaining({
+              item: item._id,
               quantity: 2,
-            },
-          ],
-          session: session.id,
+            }),
+          ]),
+          session: session._id,
           status: "Novo",
         }),
       ])
     );
 
-    session = await Session.findById(session.id).populate("orders").lean();
+    session = await Session.findById(session._id).populate("orders").lean();
 
     expect(session.orders).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          items: [
-            {
-              item: item.id,
+          items: expect.arrayContaining([
+            expect.objectContaining({
+              item: item._id,
               quantity: 2,
-            },
-          ],
-          session: session.id,
+            }),
+          ]),
+          session: session._id,
           status: "Novo",
         }),
       ])
@@ -92,13 +97,13 @@ describe("Create Item Service", () => {
       createOrder.execute({
         items: [
           {
-            item: item.id,
+            item: item._id,
             quantity: 2,
           },
         ],
-        session: "asdasdasdasdasd",
+        session: "615fef7328a5cf98ee18106b",
       });
 
-    await expect(response()).rejects.toThrow();
+    await expect(response()).rejects.toThrow("Session not found");
   });
 });

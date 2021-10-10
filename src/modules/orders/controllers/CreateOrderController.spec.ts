@@ -33,7 +33,7 @@ describe("Create order router", () => {
     });
   });
 
-  it("should return validation error", async () => {
+  it("should return validation error for empty items array", async () => {
     const MockCreateOrderService = { execute: jest.fn() };
 
     const createOrder = new CreateOrderController(MockCreateOrderService);
@@ -50,7 +50,7 @@ describe("Create order router", () => {
     expect(MockCreateOrderService.execute).not.toBeCalled();
   });
 
-  it("should return validation error", async () => {
+  it("should return validation error for items without quantity", async () => {
     const MockCreateOrderService = { execute: jest.fn() };
 
     const createOrder = new CreateOrderController(MockCreateOrderService);
@@ -58,6 +58,9 @@ describe("Create order router", () => {
     const req = getMockReq({
       body: {
         items: [
+          {
+            item: "item_id",
+          },
           {
             item: "item_id",
           },

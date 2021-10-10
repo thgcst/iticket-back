@@ -1,8 +1,9 @@
-import { UserRequest } from "@shared/infra/http/middlewares/userAuthentication";
 import { Response } from "express";
 
 import { autoInjectable } from "tsyringe";
 import * as Yup from "yup";
+
+import { UserRequest } from "@shared/infra/http/middlewares/userAuthentication";
 
 import CreateOrderService from "../services/CreateOrderService";
 
@@ -18,13 +19,12 @@ export default class CreateOrderController {
     const schema = Yup.object().shape({
       items: Yup.array()
         .of(
-          Yup.object()
-            .shape({
-              item: Yup.string().required(),
-              quantity: Yup.number().required(),
-            })
-            .required()
+          Yup.object().shape({
+            item: Yup.string().required(),
+            quantity: Yup.number().required(),
+          })
         )
+        .min(1)
         .required(),
     });
 
