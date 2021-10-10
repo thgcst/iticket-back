@@ -33,7 +33,7 @@ export default class SignInManagerService {
     delete manager.password;
 
     const token = jwt.sign(
-      { managerId: manager.id },
+      { managerId: manager._id },
       authConfig.manager.secret,
       {
         expiresIn: authConfig.manager.expiresIn,

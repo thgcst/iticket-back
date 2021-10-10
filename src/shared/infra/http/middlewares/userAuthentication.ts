@@ -1,38 +1,46 @@
 import { Request, Response, NextFunction } from "express";
 
 import jwt from "jsonwebtoken";
+import { autoInjectable } from "tsyringe";
 
 import authConfig from "@config/auth";
 
 import TokenError from "@shared/errors/TokenError";
 
-export default function userAuthentication(
-  req: Request,
-  res: Response,
-  next: NextFunction
-): void | Error {
-  const authHeader = req.headers.authorization;
+export type UserRequest = {
+  userId: string;
+  restaurantId: string;
+} & Request;
 
-  if (!authHeader) {
-    throw new TokenError("JWT token is missing.");
-  }
+@autoInjectable()
+export default class UserAuthentication {
+  async execute(
+    req: UserRequest,
+    res: Response,
+    next: NextFunction
+  ): Promise<void | TokenError> {
+    const authHeader = req.headers.authorization;
 
-  const [, token] = authHeader.split(" ");
+    if (!authHeader) {
+      throw new TokenError("JWT token is missing.");
+    }
 
-  if (!token) {
-    throw new TokenError("JWT token is missing.");
-  }
+    const [, token] = authHeader.split(" ");
 
-  try {
-    const decoded: { sessionId: string } = jwt.verify(
-      token,
-      authConfig.user.secret
-    );
+    if (!token) {
+      throw new TokenError("JWT token is missing.");
+    }
 
-    req.sessionId = decoded.sessionId;
+    try {
+      const decoded = jwt.verify(token, authConfig.user.secret) as {
+        userId: string;
+      };
 
-    return next();
-  } catch {
-    throw new TokenError("Invalid JWT token");
+      req.userId = decoded.userId;
+
+      return next();
+    } catch {
+      return new TokenError("Invalid JWT token");
+    }
   }
 }

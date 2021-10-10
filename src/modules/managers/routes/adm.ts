@@ -2,13 +2,17 @@ import express from "express";
 
 import { container } from "tsyringe";
 
-import admAuthentication from "@shared/infra/http/middlewares/admAuthentication";
+import AdmAuthentication, {
+  AdmRequest,
+} from "@shared/infra/http/middlewares/AdmAuthentication";
 
 import CreateManagerController from "../controllers/CreateManagerController";
 
 const admRouter = express.Router();
 
-admRouter.use(admAuthentication);
+admRouter.use((req: AdmRequest, res, next) =>
+  container.resolve(AdmAuthentication).execute(req, res, next)
+);
 
 admRouter.post("/", (req, res) =>
   container.resolve(CreateManagerController).execute(req, res)
