@@ -9,7 +9,7 @@ import MongoMock from "@shared/tests/MongoMock";
 import Order from "../schema";
 import CreateOrderService from "./CreateOrderService";
 
-describe("Create Item Service", () => {
+describe("Create order service", () => {
   let session: SessionDocument;
   let item: ItemDocument;
 

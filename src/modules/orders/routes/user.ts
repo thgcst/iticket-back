@@ -8,12 +8,12 @@ import userAuthentication, {
 
 import CreateOrderController from "../controllers/CreateOrderController";
 
-const itemRouter = express.Router();
+const userRouter = express.Router();
 
-itemRouter.use(userAuthentication);
+userRouter.use(userAuthentication);
 
-itemRouter.post("/", (req: UserRequest, res) =>
+userRouter.post("/", (req: UserRequest, res) =>
   container.resolve(CreateOrderController).execute(req, res)
 );
 
-export default itemRouter;
+export default userRouter;

@@ -2,7 +2,7 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 
 import CreateOrderController from "./CreateOrderController";
 
-describe("Create order router", () => {
+describe("Create order controller", () => {
   it("should clear body", async () => {
     const MockCreateOrderService = { execute: jest.fn() };
 
