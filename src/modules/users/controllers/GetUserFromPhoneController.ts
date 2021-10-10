@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import GetUserFromPhoneService from "../services/GetUserFromPhoneService";
 
 @autoInjectable()
-export default class CreateRestaurantRouter {
+export default class GetUserFromPhoneController {
   getUserFromPhoneService: GetUserFromPhoneService;
 
   constructor(getUserFromPhoneService: GetUserFromPhoneService) {

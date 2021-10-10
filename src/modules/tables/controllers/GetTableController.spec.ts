@@ -5,7 +5,7 @@ import MongoMock from "@shared/tests/MongoMock";
 import User from "../schema";
 import GetTableController from "./GetTableController";
 
-describe("Get user from phone controller", () => {
+describe("Get table controller", () => {
   beforeAll(async () => {
     await MongoMock.connect();
   });

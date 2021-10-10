@@ -5,7 +5,7 @@ import MongoMock from "@shared/tests/MongoMock";
 import Restaurant from "../schema";
 import GetRestaurantController from "./GetRestaurantController";
 
-describe("Get restaurant router", () => {
+describe("Get restaurant controller", () => {
   beforeAll(async () => {
     await MongoMock.connect();
   });
