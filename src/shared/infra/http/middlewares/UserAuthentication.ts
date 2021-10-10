@@ -8,8 +8,7 @@ import authConfig from "@config/auth";
 import TokenError from "@shared/errors/TokenError";
 
 export type UserRequest = {
-  userId: string;
-  restaurantId: string;
+  sessionId: string;
 } & Request;
 
 @autoInjectable()
@@ -33,10 +32,10 @@ export default class UserAuthentication {
 
     try {
       const decoded = jwt.verify(token, authConfig.user.secret) as {
-        userId: string;
+        sessionId: string;
       };
 
-      req.userId = decoded.userId;
+      req.sessionId = decoded.sessionId;
 
       return next();
     } catch {
