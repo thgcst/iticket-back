@@ -56,9 +56,9 @@ describe("Create Item Service", () => {
       createItem.execute({
         name: "Coca",
         price: 123,
-        restaurant: "asdasdasdasdasd",
+        restaurant: "615f3c597a05198a375a8e32",
       });
 
-    await expect(response()).rejects.toThrow();
+    await expect(response()).rejects.toThrow("");
   });
 });

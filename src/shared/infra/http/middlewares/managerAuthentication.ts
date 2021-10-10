@@ -7,7 +7,7 @@ import authConfig from "@config/auth";
 import TokenError from "@shared/errors/TokenError";
 
 export default function managerAuthentication(
-  req: Request,
+  req: ManagerRequest,
   res: Response,
   next: NextFunction
 ): void | Error {
@@ -24,10 +24,9 @@ export default function managerAuthentication(
   }
 
   try {
-    const decoded: { managerId: string } = jwt.verify(
-      token,
-      authConfig.manager.secret
-    );
+    const decoded = jwt.verify(token, authConfig.manager.secret) as {
+      managerId: string;
+    };
 
     req.managerId = decoded.managerId;
 
@@ -36,3 +35,7 @@ export default function managerAuthentication(
     throw new TokenError("Invalid JWT token");
   }
 }
+
+export type ManagerRequest = {
+  managerId: string;
+} & Request;

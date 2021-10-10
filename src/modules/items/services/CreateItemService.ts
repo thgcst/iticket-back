@@ -10,13 +10,17 @@ export default class CreateItemService {
   async execute(data: Request): Promise<Response> {
     const item = await Item.create(data);
 
-    await Restaurant.findByIdAndUpdate(
+    const restaurant = await Restaurant.findByIdAndUpdate(
       data.restaurant,
       {
         $addToSet: { items: item._id },
       },
       { upsert: true }
     );
+
+    if (!restaurant) {
+      throw new Error("Restaurant not found");
+    }
 
     return item;
   }
