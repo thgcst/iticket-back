@@ -172,4 +172,42 @@ describe("Create session service (with created table)", () => {
 
     expect(user.sessions.length).toBe(1);
   });
+
+  it("should not recreate session if an active one already exists", async () => {
+    const user = await User.create({ name: "John Doe", phone: "21123121231" });
+    const MockCreateUserService = {
+      execute: jest.fn(),
+    };
+    const MockGetUserFromPhoneService = {
+      execute: jest.fn().mockReturnValue(user),
+    };
+    const MockGetTableService = {
+      execute: jest.fn().mockReturnValue({
+        number: 1,
+        restaurant: "615f7444857695dfb05824cd",
+        sessions: [],
+        _id: "615f7444857695dfb05824ce",
+      }),
+    };
+
+    const createSession = new CreateSessionService(
+      MockCreateUserService,
+      MockGetUserFromPhoneService,
+      MockGetTableService
+    );
+
+    const createdSession = await createSession.execute({
+      name: "John Doe",
+      phone: "21123121231",
+      table: "615f7444857695dfb05824ce",
+    });
+
+    const recreatedSession = await createSession.execute({
+      name: "John Doe",
+      phone: "21123121231",
+      table: "615f7444857695dfb05824ce",
+    });
+
+    expect(recreatedSession.session.id).toBe(createdSession.session.id);
+  });
 });
