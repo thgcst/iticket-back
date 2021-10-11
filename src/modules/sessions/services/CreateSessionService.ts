@@ -59,6 +59,24 @@ export default class CreateSessionService {
       });
     }
 
+    const actualSession = await Session.findOne({
+      user: user.id,
+      active: true,
+    });
+
+    if (actualSession) {
+      return {
+        session: actualSession,
+        token: jwt.sign(
+          { sessionId: actualSession._id },
+          authConfig.user.secret,
+          {
+            expiresIn: authConfig.user.expiresIn,
+          }
+        ),
+      };
+    }
+
     const session = await Session.create({ user: user._id, table: table._id });
 
     await Table.findByIdAndUpdate(
