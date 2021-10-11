@@ -6,7 +6,7 @@ import SignInManagerController from "../controllers/SignInManagerController";
 
 const managerRouter = express.Router();
 
-managerRouter.post("/", (req, res) =>
+managerRouter.post("/signIn", (req, res) =>
   container.resolve(SignInManagerController).execute(req, res)
 );
 
