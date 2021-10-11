@@ -26,7 +26,8 @@ describe("Create table controller", () => {
     );
 
     const req = getMockReq({
-      body: { number: 1, restaurant: "615f7444857695dfb05824cd" },
+      body: { number: 1 },
+      restaurantId: "615f7444857695dfb05824cd",
     });
     const { res } = getMockRes();
 
@@ -66,7 +67,7 @@ describe("Create table controller", () => {
     );
 
     const req = getMockReq({
-      body: { number: 1, restaurant: "" },
+      body: { number: "a" },
     });
     const { res } = getMockRes();
 

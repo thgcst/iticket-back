@@ -3,16 +3,25 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { autoInjectable } from "tsyringe";
 
+import GetSessionRestaurantService from "@modules/sessions/services/GetSessionRestaurantService";
+
 import authConfig from "@config/auth";
 
 import TokenError from "@shared/errors/TokenError";
 
 export type UserRequest = {
   sessionId: string;
+  restaurantId: string;
 } & Request;
 
 @autoInjectable()
 export default class UserAuthentication {
+  getSessionRestaurantService: GetSessionRestaurantService;
+
+  constructor(getSessionRestaurantService: GetSessionRestaurantService) {
+    this.getSessionRestaurantService = getSessionRestaurantService;
+  }
+
   async execute(
     req: UserRequest,
     res: Response,
@@ -35,7 +44,12 @@ export default class UserAuthentication {
         sessionId: string;
       };
 
+      const restaurant = await this.getSessionRestaurantService.execute(
+        decoded.sessionId
+      );
+
       req.sessionId = decoded.sessionId;
+      req.restaurantId = restaurant;
 
       return next();
     } catch {

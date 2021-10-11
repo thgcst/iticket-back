@@ -1,7 +1,8 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
 import { autoInjectable } from "tsyringe";
-import * as Yup from "yup";
+
+import { UserRequest } from "@shared/infra/http/middlewares/UserAuthentication";
 
 import GetItemsOfRestaurantService from "../services/GetItemsOfRestaurantService";
 
@@ -13,15 +14,11 @@ export default class GetItemsOfRestaurantController {
     this.getItemsOfRestaurantService = getItemsOfRestaurantService;
   }
 
-  async execute(req: Request, res: Response) {
-    const schema = Yup.object().shape({
-      restaurantId: Yup.string().required(),
-    });
-
+  async execute(req: UserRequest, res: Response) {
     try {
-      const query = schema.validateSync(req.query, { stripUnknown: true });
-
-      const result = await this.getItemsOfRestaurantService.execute(query);
+      const result = await this.getItemsOfRestaurantService.execute({
+        restaurantId: req.restaurantId,
+      });
 
       return res.status(200).json(result);
     } catch (error) {
