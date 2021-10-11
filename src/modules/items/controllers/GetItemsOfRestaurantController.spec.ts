@@ -25,9 +25,7 @@ describe("Get items of restaurant controller", () => {
     );
 
     const req = getMockReq({
-      query: {
-        restaurantId: "615f20456c426960831eea7b",
-      },
+      restaurantId: "615f20456c426960831eea7b",
     });
     const { res } = getMockRes();
 
@@ -37,24 +35,5 @@ describe("Get items of restaurant controller", () => {
     expect(MockGetItemsOfRestaurantService.execute).toHaveBeenCalledWith({
       restaurantId: "615f20456c426960831eea7b",
     });
-  });
-
-  it("should return validation error", async () => {
-    const MockGetItemsOfRestaurantService = { execute: jest.fn() };
-
-    const getItemsOfRestaurant = new GetItemsOfRestaurantController(
-      MockGetItemsOfRestaurantService
-    );
-
-    const req = getMockReq({
-      query: {},
-    });
-    const { res } = getMockRes();
-
-    await getItemsOfRestaurant.execute(req, res);
-
-    expect(res.status).toBeCalledWith(400);
-    expect(res.json).toBeCalled();
-    expect(MockGetItemsOfRestaurantService.execute).not.toBeCalled();
   });
 });

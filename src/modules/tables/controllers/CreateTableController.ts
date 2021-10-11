@@ -1,7 +1,9 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 
 import { autoInjectable } from "tsyringe";
 import * as Yup from "yup";
+
+import { ManagerRequest } from "@shared/infra/http/middlewares/ManagerAuthentication";
 
 import CreateTableService from "../services/CreateTableService";
 
@@ -13,16 +15,18 @@ export default class CreateTableController {
     this.createTableService = createTableService;
   }
 
-  async execute(req: Request, res: Response) {
+  async execute(req: ManagerRequest, res: Response) {
     const schema = Yup.object().shape({
       number: Yup.number().required(),
-      restaurant: Yup.string().required(),
     });
 
     try {
       const body = schema.validateSync(req.body, { stripUnknown: true });
 
-      const result = await this.createTableService.execute(body);
+      const result = await this.createTableService.execute({
+        ...body,
+        restaurant: req.restaurantId,
+      });
 
       return res.status(200).json(result);
     } catch (error) {

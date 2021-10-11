@@ -14,7 +14,7 @@ userRouter.use((req: UserRequest, res, next) =>
   container.resolve(UserAuthentication).execute(req, res, next)
 );
 
-userRouter.get("/", (req, res) =>
+userRouter.get("/", (req: UserRequest, res) =>
   container.resolve(GetItemsOfRestaurantController).execute(req, res)
 );
 

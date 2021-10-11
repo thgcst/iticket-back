@@ -29,9 +29,10 @@ describe("Get table service", () => {
     const getTable = new GetTableService();
     const table = await getTable.execute({ tableId: createdTable._id });
 
-    expect(table).toMatchObject({
-      number: 1,
-      restaurant: restaurant._id,
+    expect(table.number).toBe(1);
+    expect(table.restaurant).toMatchObject({
+      _id: restaurant._id,
+      name: "Bar do zé",
     });
   });
 
