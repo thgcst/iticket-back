@@ -2,19 +2,12 @@ import jwt from "jsonwebtoken";
 import { Socket } from "socket.io";
 import { autoInjectable } from "tsyringe";
 
-import GetManagerRestaurantService from "@modules/managers/services/GetManagerRestaurantService";
 import Order from "@modules/orders/schema";
 
 import authConfig from "@config/auth";
 
 @autoInjectable()
 export default class joinSessionRoom {
-  getManagerRestaurantService: GetManagerRestaurantService;
-
-  constructor(getManagerRestaurantService: GetManagerRestaurantService) {
-    this.getManagerRestaurantService = getManagerRestaurantService;
-  }
-
   execute(io: Socket) {
     io.on("joinSessionRoom", async (token: string) => {
       try {
