@@ -43,12 +43,12 @@ export default class ManagerAuthentication {
         managerId: string;
       };
 
-      const restaurant = await this.getManagerRestaurantService.execute(
+      const restaurantId = await this.getManagerRestaurantService.execute(
         decoded.managerId
       );
 
       req.managerId = decoded.managerId;
-      req.restaurantId = restaurant;
+      req.restaurantId = restaurantId;
 
       return next();
     } catch {

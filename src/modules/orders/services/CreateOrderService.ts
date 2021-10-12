@@ -15,7 +15,7 @@ type Response = OrderDocument;
 
 export default class CreateOrderService {
   async execute(data: Request): Promise<Response> {
-    const order = await Order.create(data);
+    let order = await Order.create(data);
 
     const session = await Session.findByIdAndUpdate(
       data.session,
@@ -31,7 +31,7 @@ export default class CreateOrderService {
 
     const table = await Table.findById(session.table);
 
-    await Order.findByIdAndUpdate(order.id, {
+    order = await Order.findByIdAndUpdate(order.id, {
       restaurant: table.restaurant,
     });
 
