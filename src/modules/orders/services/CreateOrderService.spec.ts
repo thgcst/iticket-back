@@ -44,7 +44,7 @@ describe("Create order service", () => {
     });
   });
 
-  it("should be able to create an item", async () => {
+  it("should be able to create an order", async () => {
     const createOrder = new CreateOrderService();
     await createOrder.execute({
       items: [
