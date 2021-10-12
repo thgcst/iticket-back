@@ -16,7 +16,8 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
       trim: true,
-      default: "Novo",
+      enum: ["Enviado", "Preparando", "Pronto"],
+      default: "Enviado",
     },
     items: [
       {
@@ -31,6 +32,7 @@ const OrderSchema = new Schema(
       },
     ],
     session: { type: Schema.Types.ObjectId, ref: "Session" },
+    restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant" },
   },
   {
     timestamps: true,

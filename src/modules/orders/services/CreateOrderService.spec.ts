@@ -68,7 +68,7 @@ describe("Create order service", () => {
             }),
           ]),
           session: session._id,
-          status: "Novo",
+          status: "Enviado",
         }),
       ])
     );
@@ -85,7 +85,7 @@ describe("Create order service", () => {
             }),
           ]),
           session: session._id,
-          status: "Novo",
+          status: "Enviado",
         }),
       ])
     );

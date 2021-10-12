@@ -1,12 +1,12 @@
 import { getMockReq, getMockRes } from "@jest-mock/express";
 
-import GetUserOrdersController from "./GetUserOrdersController";
+import GetSessionOrdersController from "./GetSessionOrdersController";
 
 describe("Get user orders controller", () => {
   it("should clear body", async () => {
     const MockGetSessionOrdersService = { execute: jest.fn() };
 
-    const createOrder = new GetUserOrdersController(
+    const createOrder = new GetSessionOrdersController(
       MockGetSessionOrdersService
     );
 

@@ -7,7 +7,7 @@ import { UserRequest } from "@shared/infra/http/middlewares/UserAuthentication";
 import GetSessionOrdersService from "../services/GetSessionOrdersService";
 
 @autoInjectable()
-export default class CreateOrderController {
+export default class GetSessionOrdersController {
   getSessionOrdersService: GetSessionOrdersService;
 
   constructor(getSessionOrdersService: GetSessionOrdersService) {

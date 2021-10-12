@@ -7,7 +7,7 @@ import UserAuthentication, {
 } from "@shared/infra/http/middlewares/UserAuthentication";
 
 import CreateOrderController from "../controllers/CreateOrderController";
-import GetUserOrdersController from "../controllers/GetUserOrdersController";
+import GetSessionOrdersController from "../controllers/GetSessionOrdersController";
 
 const userRouter = express.Router();
 
@@ -20,7 +20,7 @@ userRouter.post("/", (req: UserRequest, res) =>
 );
 
 userRouter.get("/", (req: UserRequest, res) =>
-  container.resolve(GetUserOrdersController).execute(req, res)
+  container.resolve(GetSessionOrdersController).execute(req, res)
 );
 
 export default userRouter;

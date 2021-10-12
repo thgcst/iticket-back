@@ -31,10 +31,6 @@ app.use(
     res: express.Response,
     _: express.NextFunction
   ) => {
-    if (process.env.NODE_ENV !== "production") {
-      console.log(err.stack);
-    }
-
     if (err instanceof TokenError) {
       return res.status(401).json({
         code: "token.error",

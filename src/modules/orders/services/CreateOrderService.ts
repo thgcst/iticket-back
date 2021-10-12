@@ -1,4 +1,5 @@
 import Session from "@modules/sessions/schema";
+import Table from "@modules/tables/schema";
 
 import Order, { OrderDocument } from "../schema";
 
@@ -27,6 +28,12 @@ export default class CreateOrderService {
     if (!session) {
       throw new Error("Session not found");
     }
+
+    const table = await Table.findById(session.table);
+
+    await Order.findByIdAndUpdate(order.id, {
+      restaurant: table.restaurant,
+    });
 
     return order;
   }
