@@ -52,7 +52,7 @@ export default class ManagerAuthentication {
 
       return next();
     } catch {
-      return new TokenError("Invalid JWT token");
+      throw new TokenError("Invalid JWT token");
     }
   }
 }

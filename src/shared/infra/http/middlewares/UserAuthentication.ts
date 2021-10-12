@@ -53,7 +53,7 @@ export default class UserAuthentication {
 
       return next();
     } catch {
-      return new TokenError("Invalid JWT token");
+      throw new TokenError("Invalid JWT token");
     }
   }
 }

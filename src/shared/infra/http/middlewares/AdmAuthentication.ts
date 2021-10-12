@@ -40,7 +40,7 @@ export default class AdmAuthentication {
 
       return next();
     } catch {
-      return new TokenError("Invalid JWT token");
+      throw new TokenError("Invalid JWT token");
     }
   }
 }
