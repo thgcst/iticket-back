@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored",
-    "start": "node dist/shared/infra/http/server.js",
-    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/http/server.ts",
+    "start": "node dist/shared/infra/server.js",
+    "dev": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/shared/infra/server.ts",
     "test": "jest"
   },
   "devDependencies": {
@@ -58,6 +58,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.9",
     "reflect-metadata": "^0.1.13",
+    "socket.io": "^4.2.0",
     "tsyringe": "^4.6.0",
     "yup": "^0.32.9"
   }
