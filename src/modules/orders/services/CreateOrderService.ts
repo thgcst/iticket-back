@@ -33,6 +33,7 @@ export default class CreateOrderService {
 
     order = await Order.findByIdAndUpdate(order.id, {
       restaurant: table.restaurant,
+      tableNumber: table.number,
     });
 
     return order;

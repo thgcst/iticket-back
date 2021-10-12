@@ -3,6 +3,7 @@ import { Socket } from "socket.io";
 import { autoInjectable } from "tsyringe";
 
 import GetManagerRestaurantService from "@modules/managers/services/GetManagerRestaurantService";
+import Order from "@modules/orders/schema";
 
 import authConfig from "@config/auth";
 
@@ -28,6 +29,12 @@ export default class setRestaurantRoom {
         console.log("   --> Restaurant", restaurantId);
 
         io.join(restaurantId);
+
+        const orders = await Order.find({ restaurant: restaurantId })
+          .sort({ updatedAt: -1 })
+          .populate("items.item");
+
+        io.to(restaurantId).emit("orders", orders);
       } catch (error) {
         io.emit("exception", { error: "Invalid token" });
       }

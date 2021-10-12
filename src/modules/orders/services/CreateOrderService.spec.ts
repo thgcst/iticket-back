@@ -68,6 +68,7 @@ describe("Create order service", () => {
             }),
           ]),
           session: session._id,
+          tableNumber: 1,
           status: "Enviado",
         }),
       ])

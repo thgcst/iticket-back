@@ -28,7 +28,7 @@ export default class NewOrderWatcher {
       );
 
       const orders = await Order.find({ restaurant })
-        .sort({ updatedAt: -1 })
+        .sort("updatedAt")
         .populate("items.item");
 
       io.to(restaurant).emit("orders", orders);

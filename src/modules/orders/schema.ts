@@ -31,6 +31,9 @@ const OrderSchema = new Schema(
         },
       },
     ],
+    tableNumber: {
+      type: Number,
+    },
     session: { type: Schema.Types.ObjectId, ref: "Session" },
     restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant" },
   },
