@@ -12,7 +12,7 @@ export default class GetRestaurantOrdersService {
       restaurant: restaurantId,
       // status: { $ne: "Pronto" },
     })
-      .sort("updatedAt")
+      .sort({ updatedAt: -1 })
       .populate("items.item");
 
     return orders;

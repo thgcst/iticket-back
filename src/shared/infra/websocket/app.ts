@@ -8,6 +8,10 @@ import SetRestaurantRoom from "./SetRestaurantRoom";
 const WS = (io: Socket) => {
   console.log("\n --> Socket connected", io.id);
 
+  io.on("disconnect", () => {
+    console.log("\n --> Socket disconnected", io.id);
+  });
+
   container.resolve(NewOrderWatcher).execute(io);
   container.resolve(SetRestaurantRoom).execute(io);
 };
