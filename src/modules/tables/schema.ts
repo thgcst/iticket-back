@@ -28,4 +28,6 @@ const TableSchema = new Schema(
   }
 );
 
-export default mongoose.model<TableDocument, TableModel>("Table", TableSchema);
+const Table = mongoose.model<TableDocument, TableModel>("Table", TableSchema);
+
+export default Table;

@@ -28,4 +28,6 @@ const AdmSchema = new Schema(
   }
 );
 
-export default mongoose.model<AdmDocument, AdmModel>("Adm", AdmSchema);
+const Adm = mongoose.model<AdmDocument, AdmModel>("Adm", AdmSchema);
+
+export default Adm;
