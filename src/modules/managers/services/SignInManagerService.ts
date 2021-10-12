@@ -18,7 +18,9 @@ type Response = LeanDocument<
 
 export default class SignInManagerService {
   async execute({ email, password }: Request): Promise<Response> {
-    const manager = await Manager.findOne({ email }).lean();
+    const manager = await Manager.findOne({ email })
+      .populate("restaurant", "name")
+      .lean();
 
     if (!manager) {
       throw new Error("Invalid email/password");
