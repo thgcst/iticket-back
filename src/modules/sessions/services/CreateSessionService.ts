@@ -60,7 +60,8 @@ export default class CreateSessionService {
     }
 
     const actualSession = await Session.findOne({
-      user: user.id,
+      user: user._id,
+      table: data.table,
       active: true,
     });
 
