@@ -8,7 +8,7 @@ import Order from "@modules/orders/schema";
 import authConfig from "@config/auth";
 
 @autoInjectable()
-export default class setRestaurantRoom {
+export default class joinRestaurantRoom {
   getManagerRestaurantService: GetManagerRestaurantService;
 
   constructor(getManagerRestaurantService: GetManagerRestaurantService) {
@@ -31,7 +31,7 @@ export default class setRestaurantRoom {
         io.join(restaurantId);
 
         const orders = await Order.find({ restaurant: restaurantId })
-          .sort({ updatedAt: -1 })
+          .sort("updatedAt")
           .populate("items.item");
 
         io.to(restaurantId).emit("orders", orders);

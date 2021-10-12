@@ -6,7 +6,7 @@ import GetSessionRestaurantService from "@modules/sessions/services/GetSessionRe
 import Order from "../schema";
 
 @autoInjectable()
-export default class NewOrderWatcher {
+export default class SessionOrdersWatcher {
   getSessionRestaurantService: GetSessionRestaurantService;
 
   constructor(getSessionRestaurantService: GetSessionRestaurantService) {
@@ -23,15 +23,11 @@ export default class NewOrderWatcher {
         return;
       }
 
-      const restaurant = await this.getSessionRestaurantService.execute(
-        session
-      );
-
-      const orders = await Order.find({ restaurant })
+      const orders = await Order.find({ session })
         .sort("updatedAt")
         .populate("items.item");
 
-      io.to(restaurant).emit("orders", orders);
+      io.to(session).emit("orders", orders);
     });
   }
 }

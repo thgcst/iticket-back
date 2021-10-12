@@ -1,9 +1,11 @@
 import { Socket } from "socket.io";
 import { container } from "tsyringe";
 
-import NewOrderWatcher from "@modules/orders/watchers/NewOrderWatcher";
+import RestaurantOrdersWatcher from "@modules/orders/watchers/RestaurantOrdersWatcher";
+import SessionOrdersWatcher from "@modules/orders/watchers/SessionOrdersWatcher";
 
-import SetRestaurantRoom from "./SetRestaurantRoom";
+import joinRestaurantRoom from "./joinRestaurantRoom";
+import joinSessionRoom from "./joinSessionRoom";
 
 const WS = (io: Socket) => {
   console.log("\n --> Socket connected", io.id);
@@ -12,8 +14,10 @@ const WS = (io: Socket) => {
     console.log("\n --> Socket disconnected", io.id);
   });
 
-  container.resolve(NewOrderWatcher).execute(io);
-  container.resolve(SetRestaurantRoom).execute(io);
+  container.resolve(joinRestaurantRoom).execute(io);
+  container.resolve(joinSessionRoom).execute(io);
+  container.resolve(RestaurantOrdersWatcher).execute(io);
+  container.resolve(SessionOrdersWatcher).execute(io);
 };
 
 export default WS;
