@@ -211,7 +211,7 @@ describe("Create session service (with created table)", () => {
     expect(recreatedSession.session.id).toBe(createdSession.session.id);
   });
 
-  it.only("should create another session if the table is different", async () => {
+  it("should create another session if the table is different", async () => {
     const user = await User.create({ name: "John Doe", phone: "21123121231" });
     const MockCreateUserService = {
       execute: jest.fn(),
