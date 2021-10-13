@@ -17,6 +17,8 @@ describe("Create session service", () => {
 
   beforeEach(async () => {
     await Session.deleteMany({});
+    await Table.deleteMany({});
+    await User.deleteMany({});
   });
 
   it("should return error if table doesn't exist", async () => {
