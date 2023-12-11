@@ -11,8 +11,10 @@
   "rest-client.environmentVariables": {
     "local": {
       "baseUrl": "http://localhost:3333",
-      "clientUrl": "http://localhost:3000",
-      "admToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1JZCI6IjY1NzY3MTU5N2FmYTkxMTgwYWYxMjFmMCIsImlhdCI6MTcwMjI2MTYwNiwiZXhwIjoxNzAyMzQ4MDA2fQ.yOqHvRgvxtbGpyZjg8hoJSkm4-ovbeOQeyn4FzGTD-Y"
+      "clientUrl": "http://192.168.3.125:3000",
+      "admToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1JZCI6IjY1NzY3MTU5N2FmYTkxMTgwYWYxMjFmMCIsImlhdCI6MTcwMjI2MTYwNiwiZXhwIjoxNzAyMzQ4MDA2fQ.yOqHvRgvxtbGpyZjg8hoJSkm4-ovbeOQeyn4FzGTD-Y",
+      "managerToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJtYW5hZ2VySWQiOiI2NTc2Nzg0ZDFkZTU0Y2NkOWU0NTE0NmEiLCJpYXQiOjE3MDIyNjU2NjksImV4cCI6MTcwMjM1MjA2OX0.zZ0QlPL-CgsQwSZbXgoEIU1UzR3jae3dzVG3NNxMPo4",
+      "userToken": ""
     },
     "production": {
       "baseUrl": "",

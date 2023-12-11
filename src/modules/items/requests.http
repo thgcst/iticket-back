@@ -1,0 +1,11 @@
+### Create item
+POST {{baseUrl}}/v1/manager/items
+content-type: application/json
+Authorization: Bearer {{managerToken}}
+
+{
+   "name":"BLOOMIN’ ONION",
+   "description":"Nossa famosa cebola gigante e dourada com o autêntico sabor do Outback. Acompanha nosso maravilhoso molho Bloom.\n\n*Vegetariano – Esse produto não possui carne de origem animal mas contém ovo e leite.",
+   "price":54.90,
+   "image":"https://cdn.outback.com.br/wp-data/wp-content/uploads/2018/10/Bloomin_Onion_cmyk_outback.png"
+}

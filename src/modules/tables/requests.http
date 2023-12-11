@@ -1,0 +1,16 @@
+### Create table
+POST {{baseUrl}}/v1/manager/tables
+content-type: application/json
+Authorization: Bearer {{managerToken}}
+
+{
+    "number": 1
+}
+
+### Sign In
+GET {{baseUrl}}/v1/user/tables?tableId=1
+Authorization: Bearer {{userToken}}
+
+
+### Get table QRCode
+GET https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{clientUrl}}/login?table=657683dd8ad331e36a0a0967
