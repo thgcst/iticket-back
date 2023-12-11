@@ -16,26 +16,31 @@ describe("Get items of restaurant service", () => {
   });
 
   beforeEach(async () => {
-    await Item.deleteMany({});
-    await Restaurant.deleteMany({});
+    await Item.deleteMany();
+    await ItemCategory.deleteMany();
+    await Restaurant.deleteMany();
   });
 
   it("should be able to get all items of a restaurant", async () => {
     const restaurant = await Restaurant.create({ name: "Suqueria" });
-    const category = await ItemCategory.create({ name: "Suqueria", order: 1 });
+    const itemCategory = await ItemCategory.create({
+      name: "Suqueria",
+      order: 1,
+      restaurant: String(restaurant._id),
+    });
 
     const item1 = await Item.create({
       name: "Coca",
       price: 6.5,
       restaurant: String(restaurant._id),
-      itemCategory: String(category._id),
+      itemCategory: String(itemCategory._id),
     });
 
     const item2 = await Item.create({
       name: "Guaraná",
       price: 7,
       restaurant: String(restaurant._id),
-      itemCategory: String(category._id),
+      itemCategory: String(itemCategory._id),
     });
 
     Restaurant.findByIdAndUpdate(

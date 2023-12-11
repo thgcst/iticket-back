@@ -13,7 +13,7 @@ describe("Get user from phone service", () => {
   });
 
   beforeEach(async () => {
-    await User.deleteMany({});
+    await User.deleteMany();
   });
 
   it("should be able to get an user from it's phone", async () => {

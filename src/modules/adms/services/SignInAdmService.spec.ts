@@ -15,7 +15,7 @@ describe("Sign in adm service", () => {
   });
 
   beforeEach(async () => {
-    await Adm.deleteMany({});
+    await Adm.deleteMany();
   });
 
   it("should sign adm in", async () => {

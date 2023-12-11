@@ -19,7 +19,7 @@ describe("Create session controller", () => {
   });
 
   beforeEach(async () => {
-    await User.deleteMany({});
+    await User.deleteMany();
 
     const mockFn = { execute: jest.fn() };
 

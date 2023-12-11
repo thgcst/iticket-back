@@ -15,7 +15,7 @@ describe("Get items of restaurant controller", () => {
   });
 
   beforeEach(async () => {
-    await Item.deleteMany({});
+    await Item.deleteMany();
   });
 
   it("should clear query", async () => {

@@ -18,8 +18,8 @@ describe("Get manager's restaurant service", () => {
   });
 
   beforeEach(async () => {
-    await Manager.deleteMany({});
-    await Restaurant.deleteMany({});
+    await Manager.deleteMany();
+    await Restaurant.deleteMany();
 
     restaurant = await Restaurant.create({ name: "Bar do zé" });
   });

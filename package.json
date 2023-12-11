@@ -16,6 +16,7 @@
     "@babel/plugin-proposal-decorators": "^7.15.8",
     "@babel/preset-env": "^7.10.2",
     "@babel/preset-typescript": "^7.10.1",
+    "@faker-js/faker": "^8.3.1",
     "@jest-mock/express": "^1.4.5",
     "@shelf/jest-mongodb": "^2.1.0",
     "@types/bcryptjs": "^2.4.2",

@@ -1,3 +1,4 @@
+import ItemCategory from "@modules/itemCategories/schema";
 import Item from "@modules/items/schema";
 import Restaurant from "@modules/restaurants/schema";
 import Session from "@modules/sessions/schema";
@@ -21,12 +22,13 @@ describe("Get session orders service", () => {
   });
 
   beforeEach(async () => {
-    await Order.deleteMany({});
-    await Session.deleteMany({});
-    await User.deleteMany({});
-    await Restaurant.deleteMany({});
-    await Table.deleteMany({});
-    await Item.deleteMany({});
+    await Order.deleteMany();
+    await Session.deleteMany();
+    await User.deleteMany();
+    await Restaurant.deleteMany();
+    await Table.deleteMany();
+    await Item.deleteMany();
+    await ItemCategory.deleteMany();
 
     const { id: user1 } = await User.create({
       name: "John1",
@@ -37,6 +39,11 @@ describe("Get session orders service", () => {
       phone: "21999999992",
     });
     const { id: restaurant } = await Restaurant.create({ name: "Bar do Zé" });
+    const { id: itemCategory } = await ItemCategory.create({
+      name: "Bebidas",
+      order: 1,
+      restaurant,
+    });
     const { id: table } = await Table.create({ restaurant, number: 1 });
 
     session1 = (await Session.create({ user: user1, table })).id;
@@ -45,6 +52,7 @@ describe("Get session orders service", () => {
       restaurant,
       name: "Suco de laranja",
       price: 12,
+      itemCategory,
     });
 
     await Order.create({

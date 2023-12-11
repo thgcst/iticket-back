@@ -19,10 +19,10 @@ describe("Get sessions's restaurant service", () => {
   });
 
   beforeEach(async () => {
-    await Session.deleteMany({});
-    await Restaurant.deleteMany({});
-    await Table.deleteMany({});
-    await User.deleteMany({});
+    await Session.deleteMany();
+    await Restaurant.deleteMany();
+    await Table.deleteMany();
+    await User.deleteMany();
 
     restaurant = await Restaurant.create({ name: "Bar do zé" });
     const { id: table } = await Table.create({

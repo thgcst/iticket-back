@@ -15,7 +15,7 @@ describe("Create item router", () => {
   });
 
   beforeEach(async () => {
-    await Item.deleteMany({});
+    await Item.deleteMany();
   });
 
   it("should clear body", async () => {

@@ -15,7 +15,7 @@ describe("Sign manager in controller", () => {
   });
 
   beforeEach(async () => {
-    await Manager.deleteMany({});
+    await Manager.deleteMany();
   });
 
   it("should clear body", async () => {

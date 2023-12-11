@@ -1,3 +1,6 @@
+import { faker } from "@faker-js/faker";
+
+import ItemCategory from "@modules/itemCategories/schema";
 import Item, { ItemDocument } from "@modules/items/schema";
 import Restaurant from "@modules/restaurants/schema";
 import Session, { SessionDocument } from "@modules/sessions/schema";
@@ -22,18 +25,24 @@ describe("Create order service", () => {
   });
 
   beforeEach(async () => {
-    await Order.deleteMany({});
-    await Session.deleteMany({});
-    await User.deleteMany({});
-    await Restaurant.deleteMany({});
-    await Table.deleteMany({});
-    await Item.deleteMany({});
+    await Order.deleteMany();
+    await Session.deleteMany();
+    await User.deleteMany();
+    await Restaurant.deleteMany();
+    await Table.deleteMany();
+    await Item.deleteMany();
+    await ItemCategory.deleteMany();
 
     const { id: user } = await User.create({
       name: "John",
-      phone: "21999999999",
+      phone: faker.phone.number(),
     });
     const { id: restaurant } = await Restaurant.create({ name: "Bar do Zé" });
+    const { id: itemCategory } = await ItemCategory.create({
+      name: "Bebidas",
+      order: 1,
+      restaurant,
+    });
     const { id: table } = await Table.create({ restaurant, number: 1 });
 
     session = await Session.create({ user, table });
@@ -41,6 +50,7 @@ describe("Create order service", () => {
       restaurant,
       name: "Suco de laranja",
       price: 12,
+      itemCategory,
     });
   });
 

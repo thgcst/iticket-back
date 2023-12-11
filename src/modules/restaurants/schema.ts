@@ -3,6 +3,7 @@ import mongoose, { Document, Schema, Model } from "mongoose";
 export type RestaurantAttributes = {
   name: string;
   items: string[];
+  itemCategories: string[];
   tables: string[];
   managers: string[];
 };

@@ -15,8 +15,8 @@ describe("Get table service", () => {
   });
 
   beforeEach(async () => {
-    await Table.deleteMany({});
-    await Restaurant.deleteMany({});
+    await Table.deleteMany();
+    await Restaurant.deleteMany();
   });
 
   it("should get a table from it's id", async () => {

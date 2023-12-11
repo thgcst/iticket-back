@@ -16,7 +16,7 @@ describe("Create adm service", () => {
   });
 
   beforeEach(async () => {
-    await Adm.deleteMany({});
+    await Adm.deleteMany();
   });
 
   it("should be able to create an adm", async () => {

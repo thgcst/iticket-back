@@ -15,7 +15,7 @@ describe("Sign adm in controller", () => {
   });
 
   beforeEach(async () => {
-    await Adm.deleteMany({});
+    await Adm.deleteMany();
   });
 
   it("should clear body", async () => {

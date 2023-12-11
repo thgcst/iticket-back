@@ -1,3 +1,4 @@
+import ItemCategory from "@modules/itemCategories/schema";
 import Item from "@modules/items/schema";
 import Restaurant from "@modules/restaurants/schema";
 import Session from "@modules/sessions/schema";
@@ -21,12 +22,13 @@ describe("Get restaurant orders service", () => {
   });
 
   beforeEach(async () => {
-    await Order.deleteMany({});
-    await Session.deleteMany({});
-    await User.deleteMany({});
-    await Restaurant.deleteMany({});
-    await Table.deleteMany({});
-    await Item.deleteMany({});
+    await Order.deleteMany();
+    await Session.deleteMany();
+    await User.deleteMany();
+    await Restaurant.deleteMany();
+    await Table.deleteMany();
+    await Item.deleteMany();
+    await ItemCategory.deleteMany();
 
     const { id: user1 } = await User.create({
       name: "John1",
@@ -39,6 +41,18 @@ describe("Get restaurant orders service", () => {
 
     restaurant1 = (await Restaurant.create({ name: "Bar do Zé" })).id;
     restaurant2 = (await Restaurant.create({ name: "Madero" })).id;
+
+    const { id: itemCategory1 } = await ItemCategory.create({
+      name: "Bebidas",
+      order: 1,
+      restaurant: restaurant1,
+    });
+
+    const { id: itemCategory2 } = await ItemCategory.create({
+      name: "Aperitivos",
+      order: 2,
+      restaurant: restaurant2,
+    });
 
     const { id: table1 } = await Table.create({
       restaurant: restaurant1,
@@ -62,11 +76,13 @@ describe("Get restaurant orders service", () => {
       restaurant: restaurant1,
       name: "Suco de laranja",
       price: 12,
+      itemCategory: itemCategory1,
     });
     const { id: item2 } = await Item.create({
       restaurant: restaurant2,
       name: "Suco de laranja",
       price: 12,
+      itemCategory: itemCategory2,
     });
 
     await Order.create({

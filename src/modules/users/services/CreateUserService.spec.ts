@@ -13,7 +13,7 @@ describe("Create user service", () => {
   });
 
   beforeEach(async () => {
-    await User.deleteMany({});
+    await User.deleteMany();
   });
 
   it("should be able to create an user", async () => {

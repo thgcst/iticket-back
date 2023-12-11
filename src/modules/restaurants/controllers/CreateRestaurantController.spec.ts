@@ -15,7 +15,7 @@ describe("Create restaurant controller", () => {
   });
 
   beforeEach(async () => {
-    await Restaurant.deleteMany({});
+    await Restaurant.deleteMany();
   });
 
   it("should clear body", async () => {

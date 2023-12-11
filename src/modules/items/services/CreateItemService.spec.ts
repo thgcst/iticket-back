@@ -16,13 +16,18 @@ describe("Create Item Service", () => {
   });
 
   beforeEach(async () => {
-    await Item.deleteMany({});
-    await Restaurant.deleteMany({});
+    await Item.deleteMany();
+    await ItemCategory.deleteMany();
+    await Restaurant.deleteMany();
   });
 
   it("should be able to create an item", async () => {
     let restaurant = await Restaurant.create({ name: "Suqueria" });
-    const category = await ItemCategory.create({ name: "Suqueria", order: 1 });
+    const category = await ItemCategory.create({
+      name: "Suqueria",
+      order: 1,
+      restaurant: String(restaurant._id),
+    });
 
     const createItem = new CreateItemService();
     await createItem.execute({

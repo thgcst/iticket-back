@@ -2,7 +2,7 @@ import Restaurant from "@modules/restaurants/schema";
 
 import MongoMock from "@shared/tests/MongoMock";
 
-import Item from "../schema";
+import ItemCategory from "../schema";
 import CreateItemCategoryService from "./CreateItemCategoryService";
 
 describe("Create Item Service", () => {
@@ -15,8 +15,8 @@ describe("Create Item Service", () => {
   });
 
   beforeEach(async () => {
-    await Item.deleteMany({});
-    await Restaurant.deleteMany({});
+    await ItemCategory.deleteMany();
+    await Restaurant.deleteMany();
   });
 
   it("should be able to create an item", async () => {
@@ -24,17 +24,17 @@ describe("Create Item Service", () => {
 
     const createItem = new CreateItemCategoryService();
     await createItem.execute({
-      name: "Coca",
+      name: "Bebidas",
       order: 1,
       restaurant: restaurant._id,
     });
 
-    const get = await Item.find({});
+    const get = await ItemCategory.find({});
 
     expect(get).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          name: "Coca",
+          name: "Bebidas",
           order: 1,
           restaurant: restaurant._id,
         }),
@@ -42,11 +42,11 @@ describe("Create Item Service", () => {
     );
 
     restaurant = await Restaurant.findById(restaurant._id)
-      .populate("items")
+      .populate("itemCategories")
       .lean();
 
-    expect(restaurant.items).toEqual(
-      expect.arrayContaining([expect.objectContaining({ name: "Coca" })])
+    expect(restaurant.itemCategories).toEqual(
+      expect.arrayContaining([expect.objectContaining({ name: "Bebidas" })])
     );
   });
 

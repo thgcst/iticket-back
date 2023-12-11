@@ -15,7 +15,7 @@ describe("Create table controller", () => {
   });
 
   beforeEach(async () => {
-    await User.deleteMany({});
+    await User.deleteMany();
   });
 
   it("should clear body", async () => {

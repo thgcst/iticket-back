@@ -13,7 +13,7 @@ describe("Create restaurant service", () => {
   });
 
   beforeEach(async () => {
-    await Restaurant.deleteMany({});
+    await Restaurant.deleteMany();
   });
 
   it("should be able to create a restaurant", async () => {
