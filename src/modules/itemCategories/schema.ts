@@ -1,19 +1,18 @@
 import mongoose, { Document, Schema, Model } from "mongoose";
 
-export type ItemAttributes = {
+export type ItemCategoryAttributes = {
   name: string;
   description?: string;
-  price: number;
+  order: number;
   image?: string;
-  itemCategory: string;
   restaurant: string;
 };
 
-export type ItemDocument = Document & ItemAttributes;
+export type ItemCategoryDocument = Document & ItemCategoryAttributes;
 
-type ItemModel = Model<ItemDocument>;
+type ItemCategoryModel = Model<ItemCategoryDocument>;
 
-const ItemSchema = new Schema(
+const ItemCategorySchema = new Schema(
   {
     name: {
       type: String,
@@ -25,30 +24,35 @@ const ItemSchema = new Schema(
       type: String,
       trim: true,
     },
-    price: {
+    order: {
       type: Number,
       required: true,
       default: 0,
+      unique: true,
     },
     image: {
       type: String,
-    },
-    itemCategory: {
-      type: Schema.Types.ObjectId,
-      ref: "ItemCategory",
-      required: true,
     },
     restaurant: {
       type: Schema.Types.ObjectId,
       ref: "Restaurant",
       required: true,
     },
+    items: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Item",
+      },
+    ],
   },
   {
     timestamps: true,
   }
 );
 
-const Item = mongoose.model<ItemDocument, ItemModel>("Item", ItemSchema);
+const ItemCategory = mongoose.model<ItemCategoryDocument, ItemCategoryModel>(
+  "ItemCategory",
+  ItemCategorySchema
+);
 
-export default Item;
+export default ItemCategory;

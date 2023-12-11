@@ -1,0 +1,9 @@
+### Create item
+POST {{baseUrl}}/v1/manager/item_categories
+content-type: application/json
+Authorization: Bearer {{managerToken}}
+
+{
+   "name":"Sobremesas",
+   "order": 10
+}

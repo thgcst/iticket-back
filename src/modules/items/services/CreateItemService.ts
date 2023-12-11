@@ -1,3 +1,4 @@
+import ItemCategory from "@modules/itemCategories/schema";
 import Restaurant from "@modules/restaurants/schema";
 
 import Item, { ItemDocument, ItemAttributes } from "../schema";
@@ -20,6 +21,18 @@ export default class CreateItemService {
 
     if (!restaurant) {
       throw new Error("Restaurant not found");
+    }
+
+    const itemCategory = await ItemCategory.findByIdAndUpdate(
+      data.itemCategory,
+      {
+        $addToSet: { items: item._id },
+      },
+      { upsert: true }
+    );
+
+    if (!itemCategory) {
+      throw new Error("Item category not found");
     }
 
     return item;

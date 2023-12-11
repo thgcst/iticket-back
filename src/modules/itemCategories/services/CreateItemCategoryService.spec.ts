@@ -1,10 +1,9 @@
-import ItemCategory from "@modules/itemCategories/schema";
 import Restaurant from "@modules/restaurants/schema";
 
 import MongoMock from "@shared/tests/MongoMock";
 
 import Item from "../schema";
-import CreateItemService from "./CreateItemService";
+import CreateItemCategoryService from "./CreateItemCategoryService";
 
 describe("Create Item Service", () => {
   beforeAll(async () => {
@@ -22,14 +21,12 @@ describe("Create Item Service", () => {
 
   it("should be able to create an item", async () => {
     let restaurant = await Restaurant.create({ name: "Suqueria" });
-    const category = await ItemCategory.create({ name: "Suqueria", order: 1 });
 
-    const createItem = new CreateItemService();
+    const createItem = new CreateItemCategoryService();
     await createItem.execute({
       name: "Coca",
-      price: 123,
+      order: 1,
       restaurant: restaurant._id,
-      itemCategory: category._id,
     });
 
     const get = await Item.find({});
@@ -38,9 +35,8 @@ describe("Create Item Service", () => {
       expect.arrayContaining([
         expect.objectContaining({
           name: "Coca",
-          price: 123,
+          order: 1,
           restaurant: restaurant._id,
-          itemCategory: category._id,
         }),
       ])
     );
@@ -55,13 +51,12 @@ describe("Create Item Service", () => {
   });
 
   it("should not create an item", async () => {
-    const createItem = new CreateItemService();
+    const createItem = new CreateItemCategoryService();
     const response = async () =>
       createItem.execute({
         name: "Coca",
-        price: 123,
+        order: 1,
         restaurant: "615f3c597a05198a375a8e32",
-        itemCategory: "615f3c597a05198a375a8e33",
       });
 
     await expect(response()).rejects.toThrow("");

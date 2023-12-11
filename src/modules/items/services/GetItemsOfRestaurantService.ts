@@ -15,7 +15,9 @@ export default class GetItemsOfRestaurantService {
       throw new Error("Restaurant not found");
     }
 
-    const items = await Item.find({ restaurant: restaurantId });
+    const items = await Item.find({ restaurant: restaurantId }).sort({
+      category: 1,
+    });
 
     return items;
   }

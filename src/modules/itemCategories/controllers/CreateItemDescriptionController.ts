@@ -5,29 +5,28 @@ import * as Yup from "yup";
 
 import { ManagerRequest } from "@shared/infra/http/middlewares/ManagerAuthentication";
 
-import CreateItemService from "../services/CreateItemService";
+import CreateItemCategoryService from "../services/CreateItemCategoryService";
 
 @autoInjectable()
-export default class CreateItemController {
-  createItemService: CreateItemService;
+export default class CreateItemCategoryController {
+  createItemCategoryService: CreateItemCategoryService;
 
-  constructor(createItemService: CreateItemService) {
-    this.createItemService = createItemService;
+  constructor(createItemCategoryService: CreateItemCategoryService) {
+    this.createItemCategoryService = createItemCategoryService;
   }
 
   async execute(req: ManagerRequest, res: Response) {
     const schema = Yup.object().shape({
       name: Yup.string().min(3).required(),
+      order: Yup.number().required(),
       description: Yup.string(),
-      price: Yup.number().required(),
       image: Yup.string(),
-      itemCategory: Yup.string().required(),
     });
 
     try {
       const body = schema.validateSync(req.body, { stripUnknown: true });
 
-      const result = await this.createItemService.execute({
+      const result = await this.createItemCategoryService.execute({
         ...body,
         restaurant: req.restaurantId,
       });

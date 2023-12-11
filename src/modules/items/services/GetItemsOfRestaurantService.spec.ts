@@ -1,3 +1,4 @@
+import ItemCategory from "@modules/itemCategories/schema";
 import Item from "@modules/items/schema";
 import Restaurant from "@modules/restaurants/schema";
 
@@ -21,17 +22,20 @@ describe("Get items of restaurant service", () => {
 
   it("should be able to get all items of a restaurant", async () => {
     const restaurant = await Restaurant.create({ name: "Suqueria" });
+    const category = await ItemCategory.create({ name: "Suqueria", order: 1 });
 
     const item1 = await Item.create({
       name: "Coca",
       price: 6.5,
       restaurant: String(restaurant._id),
+      itemCategory: String(category._id),
     });
 
     const item2 = await Item.create({
       name: "Guaraná",
       price: 7,
       restaurant: String(restaurant._id),
+      itemCategory: String(category._id),
     });
 
     Restaurant.findByIdAndUpdate(

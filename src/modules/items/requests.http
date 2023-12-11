@@ -4,8 +4,13 @@ content-type: application/json
 Authorization: Bearer {{managerToken}}
 
 {
-   "name":"BLOOMIN’ ONION",
-   "description":"Nossa famosa cebola gigante e dourada com o autêntico sabor do Outback. Acompanha nosso maravilhoso molho Bloom.\n\n*Vegetariano – Esse produto não possui carne de origem animal mas contém ovo e leite.",
-   "price":54.90,
-   "image":"https://cdn.outback.com.br/wp-data/wp-content/uploads/2018/10/Bloomin_Onion_cmyk_outback.png"
+   "name":"HAVANNA THUNDER",
+   "description":"O nosso brownie, com nozes pecans, agora em uma versão de doce de leite Havanna. Servido com sorvete de baunilha, chantilly, crumble de biscoito e finalizado com a deliciosa calda de doce de leite Havanna.\n\n*Vegetariano – Esse produto contém leite e ovo em sua composição.",
+   "price":36.90,
+   "image":"https://cdn.outback.com.br/wp-data/wp-content/uploads/2018/10/havanna_thunder_sobremesa.jpg",
+   "itemCategory": "65768d56856247b50bafc4bf"
 }
+
+### Get items by category
+GET {{baseUrl}}/v1/user/items/by_category
+Authorization: Bearer {{userToken}}

@@ -3,7 +3,7 @@ import { getMockReq, getMockRes } from "@jest-mock/express";
 import MongoMock from "@shared/tests/MongoMock";
 
 import Item from "../schema";
-import CreateItemController from "./CreateItemController";
+import CreateItemDescriptionController from "./CreateItemDescriptionController";
 
 describe("Create item router", () => {
   beforeAll(async () => {
@@ -21,13 +21,14 @@ describe("Create item router", () => {
   it("should clear body", async () => {
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createItem = new CreateItemController(MockCreateItemService);
+    const createItem = new CreateItemDescriptionController(
+      MockCreateItemService
+    );
 
     const req = getMockReq({
       body: {
         name: "Suqueria",
-        price: 123,
-        itemCategory: "615f20456c426960831eea7b",
+        order: 1,
         unusedProp: "asd",
       },
       restaurantId: "615f20456c426960831eea7b",
@@ -39,16 +40,17 @@ describe("Create item router", () => {
     expect(res.status).toBeCalledWith(200);
     expect(MockCreateItemService.execute).toHaveBeenCalledWith({
       name: "Suqueria",
-      price: 123,
+      order: 1,
       restaurant: "615f20456c426960831eea7b",
-      itemCategory: "615f20456c426960831eea7b",
     });
   });
 
   it("should return validation error", async () => {
     const MockCreateItemService = { execute: jest.fn() };
 
-    const createItem = new CreateItemController(MockCreateItemService);
+    const createItem = new CreateItemDescriptionController(
+      MockCreateItemService
+    );
 
     const req = getMockReq({
       body: { name: "Suqueria" },
