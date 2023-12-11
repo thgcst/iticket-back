@@ -13,7 +13,15 @@ export default class GetRestaurantOrdersService {
       // status: { $ne: "Pronto" },
     })
       .sort("updatedAt")
-      .populate("items.item");
+      .populate("items.item")
+      .populate({
+        path: "session",
+        select: "user",
+        populate: {
+          path: "user",
+          select: "name",
+        },
+      });
 
     return orders;
   }
