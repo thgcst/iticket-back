@@ -1,0 +1,11 @@
+### Create restaurant
+POST {{baseUrl}}/v1/adm/restaurants
+Authorization: Bearer {{admToken}}
+content-type: application/json
+
+{
+  "name": "Outback Steakhouse"
+}
+
+### Get restaurant QRCode
+GET https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{clientUrl}}/login?table=6576753a1de54ccd9e451465

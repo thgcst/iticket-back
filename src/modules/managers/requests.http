@@ -1,0 +1,19 @@
+### Create manager
+POST {{baseUrl}}/v1/adm/managers
+content-type: application/json
+Authorization: Bearer {{admToken}}
+
+{
+    "email": "manager@iticket.com",
+    "password": "Nov@1234",
+    "restaurant": "6576753a1de54ccd9e451465"
+}
+
+### Sign In
+POST {{baseUrl}}/v1/manager/managers/signIn
+content-type: application/json
+
+{
+    "email": "manager@iticket.com",
+    "password": "Nov@1234"
+}

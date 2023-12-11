@@ -1,0 +1,17 @@
+### Sign Up
+POST {{baseUrl}}/v1/adm/adms/signUp
+content-type: application/json
+
+{
+    "email": "adm@iticket.com",
+    "password": "Nov@1234"
+}
+
+### Sign In
+POST {{baseUrl}}/v1/adm/adms/signIn
+content-type: application/json
+
+{
+    "email": "adm@iticket.com",
+    "password": "Nov@1234"
+}

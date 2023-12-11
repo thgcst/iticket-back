@@ -7,5 +7,16 @@
     "tsyringe",
     "upsert"
   ],
-  "jest.jestCommandLine": "yarn test"
+  "jest.jestCommandLine": "yarn test",
+  "rest-client.environmentVariables": {
+    "local": {
+      "baseUrl": "http://localhost:3333",
+      "clientUrl": "http://localhost:3000",
+      "admToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1JZCI6IjY1NzY3MTU5N2FmYTkxMTgwYWYxMjFmMCIsImlhdCI6MTcwMjI2MTYwNiwiZXhwIjoxNzAyMzQ4MDA2fQ.yOqHvRgvxtbGpyZjg8hoJSkm4-ovbeOQeyn4FzGTD-Y"
+    },
+    "production": {
+      "baseUrl": "",
+      "token": ""
+    }
+  }
 }
