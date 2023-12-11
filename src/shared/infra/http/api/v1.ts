@@ -3,11 +3,11 @@ import { Router } from "express";
 import admsRouter from "@modules/adms/router";
 import itemsRouter from "@modules/items/router";
 import managersRouter from "@modules/managers/router";
+import ordersRouter from "@modules/orders/router";
 import restaurantsRouter from "@modules/restaurants/router";
 import sessionsRouter from "@modules/sessions/router";
 import tablesRouter from "@modules/tables/router";
 import usersRouter from "@modules/users/router";
-import ordersRouter from "@modules/orders/router";
 
 const v1Router = Router();
 
