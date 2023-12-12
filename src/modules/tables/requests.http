@@ -14,3 +14,5 @@ Authorization: Bearer {{userToken}}
 
 ### Get table QRCode
 GET https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{clientUrl}}/login?table=657683dd8ad331e36a0a0967
+# GET https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{clientUrl}}/login?table=65769c3101781259014c74bf
+# GET https://api.qrserver.com/v1/create-qr-code/?size=500x500&data={{clientUrl}}/login?table=65769c3701781259014c74c4
